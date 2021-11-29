@@ -28,23 +28,30 @@ for (let i = 0; i < rows; i++) {
         let cell = document.createElement("div");
         cell.setAttribute("class", "address-cell");
         cell.setAttribute("contenteditable", true);
-        rowCont.appendChild(cell);
+        cell.setAttribute("spellcheck", false);
 
+        //For cell and storage identification:
+        cell.setAttribute("rid", i);
+        cell.setAttribute("cid", j);
+
+        rowCont.appendChild(cell);
         addListenerForAddressBarDisplay(cell, i, j);
     }
 
     cellsCont.appendChild(rowCont);
 }
 
-function addListenerForAddressBarDisplay(cell, i, j){
+function addListenerForAddressBarDisplay(cell, i, j) {
     cell.addEventListener("click", (event) => {
         let rowID = i + 1;
         let colID = String.fromCharCode(65 + j);
 
         addressBar.value = `${colID}${rowID}`;
-    }); 
+    });
 }
 
-
+//The first cell needs to be by-default clicked via DOM:
+let firstCell = document.querySelector(".address-cell");
+firstCell.click();
 
 

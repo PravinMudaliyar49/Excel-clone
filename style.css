@@ -28,6 +28,11 @@ body {
     padding-left: 1rem;
 }
 
+.cellprop-actions-cont>*:hover{
+    cursor: pointer;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
 .cellprop-actions-cont>* {
     display: inline-block;
     margin-right: 1rem;
@@ -39,16 +44,26 @@ body {
     outline: none;
 }
 
-.cellprop-actions-cont>.material-icons {
-    cursor: pointer;
-}
-
 .font-family-prop {
     padding: 0.2rem;
 }
 
 .font-size-prop {
     padding: 0.2rem;
+}
+
+.color-prop{
+    position: relative;
+}
+
+.color-prop > input{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
 }
 
 .formula-actions-cont {
