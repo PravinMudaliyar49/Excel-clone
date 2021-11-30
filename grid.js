@@ -10,6 +10,7 @@ for (let i = 0; i < rows; i++) {
     let addressCol = document.createElement("div");
     addressCol.innerText = i + 1;
     addressCol.setAttribute("class", "address-col");
+    addressCol.setAttribute("ccid", i);
     addressColCont.appendChild(addressCol);
 }
 
@@ -17,6 +18,7 @@ for (let i = 0; i < cols; i++) {
     let addressRow = document.createElement("div");
     addressRow.innerText = String.fromCharCode(65 + i);
     addressRow.setAttribute("class", "address-row");
+    addressRow.setAttribute("crid", i);
     addressRowCont.appendChild(addressRow);
 }
 
