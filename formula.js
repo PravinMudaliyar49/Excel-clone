@@ -7,7 +7,7 @@ for (let i = 0; i < rows; i++) {
             let [activeCell, cellProp] = getCellAndCellProp(address);
             let enteredData = activeCell.innerText;
 
-            if(enteredData === cellProp.value){
+            if (enteredData === cellProp.value) {
                 return;
             }
 
@@ -35,7 +35,19 @@ formulaBar.addEventListener("keydown", (event) => {
             removeChildFromParent(cellProp.formula);
         }
 
+        addChildToGraphComponent(inputFormula, address);
+        //Check if the formula is creating a cycle. If not, only then evaluate below.
+
+        let isCyclic = isGraphCyclic(graphComponentMatrix);
+        if (isCyclic === true) {
+            alert("The formula you've entered is leading to a cycle");
+            removeChildFromGraphComponent(inputFormula, address);
+            return;
+        }
+
         let evaluatedValue = evaluateFormula(inputFormula);
+
+
         setCellUIAndCellProp(evaluatedValue, inputFormula, address);
 
         addChildToParent(inputFormula);
@@ -117,4 +129,34 @@ function setCellUIAndCellProp(evaluatedValue, formula, address) {
     //DB update:
     cellProp.value = evaluatedValue;
     cellProp.formula = formula;
+}
+
+function addChildToGraphComponent(formula, childAddress) {
+    let [crid, ccid] = decodeRIDCIDFromAddress(childAddress);
+    let encodedFormula = formula.split(" ");
+    for (let i = 0; i < encodedFormula.length; i++) {
+        let asciiVal = encodedFormula[i].charCodeAt(0);
+
+        if (asciiVal >= 65 && asciiVal <= 90) {
+            let [prid, pcid] = decodeRIDCIDFromAddress(encodedFormula[i]);
+            graphComponentMatrix[prid][pcid].push([crid, ccid]);
+        }
+
+    }
+
+}
+
+function removeChildFromGraphComponent(formula, childAddress) {
+    let [crid, ccid] = decodeRIDCIDFromAddress(childAddress);
+    let encodedFormula = formula.split(" ");
+    for (let i = 0; i < encodedFormula.length; i++) {
+        let asciiVal = encodedFormula[i].charCodeAt(0);
+
+        if (asciiVal >= 65 && asciiVal <= 90) {
+            let [prid, pcid] = decodeRIDCIDFromAddress(encodedFormula[i]);
+            graphComponentMatrix[prid][pcid].pop();
+        }
+
+    }
+
 }
