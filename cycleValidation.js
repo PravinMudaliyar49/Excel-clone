@@ -32,13 +32,13 @@ function isGraphCyclic(graphComponentMatrix) {
         for (let j = 0; j < cols; j++) {
             if (!visited[i][j]) {
                 if (dfsCycleDetection(graphComponentMatrix, i, j, visited, dfsVisited)) {
-                    return true;
+                    return [i, j];
                 }
             }
         }
     }
 
-    return false;
+    return null;
 }
 
 function dfsCycleDetection(graphComponentMatrix, sr, sc, visited, dfsVisited) {

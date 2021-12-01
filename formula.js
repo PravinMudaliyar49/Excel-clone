@@ -24,7 +24,7 @@ for (let i = 0; i < rows; i++) {
 }
 
 let formulaBar = document.querySelector(".formula-bar");
-formulaBar.addEventListener("keydown", (event) => {
+formulaBar.addEventListener("keydown", async (event) => {
     let inputFormula = formulaBar.value;
     if (event.key === "Enter" && inputFormula) {
 
@@ -38,9 +38,17 @@ formulaBar.addEventListener("keydown", (event) => {
         addChildToGraphComponent(inputFormula, address);
         //Check if the formula is creating a cycle. If not, only then evaluate below.
 
-        let isCyclic = isGraphCyclic(graphComponentMatrix);
-        if (isCyclic === true) {
-            alert("The formula you've entered is leading to a cycle");
+        let cycleResponse = isGraphCyclic(graphComponentMatrix);
+        if (cycleResponse) {
+            // alert("The formula you've entered is leading to a cycle");
+            let response = confirm("The formula you've entered is leading to a cycle. Do you want to trace it");
+            while (response) {
+                //Keep on tracking color until user is satisfied.
+                await isGraphCyclicTracePath(graphComponentMatrix, cycleResponse);        //We need to wait here, until an iteration of color tracing isn't completed. Use promises here as well.
+
+                response = confirm("The formula you've entered is leading to a cycle. Do you want to trace it");
+            }
+
             removeChildFromGraphComponent(inputFormula, address);
             return;
         }
