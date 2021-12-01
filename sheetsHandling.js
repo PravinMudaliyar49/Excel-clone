@@ -15,6 +15,8 @@ addSheetBtn.addEventListener("click", (event) => {
     `;
 
     sheetsFolderCont.appendChild(sheet);
+    sheet.scrollIntoView();
+
     createSheetDB();
     createGraphComponentMatrix();
     handleSheetActiveness(sheet);
@@ -95,32 +97,32 @@ function createGraphComponentMatrix() {
     collectedGraphComponent.push(graphComponentMatrix);
 }
 
-function handleSheetUI(sheet){
+function handleSheetUI(sheet) {
     let allSheetsFolder = document.querySelectorAll(".sheet-folder");
 
     allSheetsFolder.forEach((sheetFolder) => {
-        sheetFolder.style.backgroundColor = "transparent"; 
+        sheetFolder.style.backgroundColor = "transparent";
     });
 
     sheet.style.backgroundColor = activeSheetColor;
 }
 
-function handleSheetRemoval(sheet){
+function handleSheetRemoval(sheet) {
     sheet.addEventListener("mousedown", (event) => {
         //Detect right click:
 
-        if(event.button !== 2){
+        if (event.button !== 2) {
             return;
         }
 
         let allSheetsFolder = document.querySelectorAll(".sheet-folder");
-        if(allSheetsFolder.length === 1){
+        if (allSheetsFolder.length === 1) {
             alert("You need to have atleast one sheet!!!!!");
             return;
         }
 
         let response = confirm("Your sheet will be removed permanently. Are you sure you still want to remove it?");
-        if(!response){
+        if (!response) {
             return;
         }
 
@@ -132,7 +134,7 @@ function handleSheetRemoval(sheet){
 
         //UI removal:
         handleSheetUIRemoval(sheet);
-        
+
         //By default, bring sheet1 to active:
         sheetDB = collectedSheetDB[0];
         graphComponentMatrix = collectedGraphComponent[0];
@@ -140,7 +142,7 @@ function handleSheetRemoval(sheet){
     });
 }
 
-function handleSheetUIRemoval(sheet){
+function handleSheetUIRemoval(sheet) {
     sheet.remove();
 
     let allSheetsFolder = document.querySelectorAll(".sheet-folder");

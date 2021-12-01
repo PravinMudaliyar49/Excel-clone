@@ -16,11 +16,20 @@ body {
 }
 
 .page-action {
-    margin: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.5rem;
+    height: 2rem;
     color: #ffffff;
 }
 
-.material-icons{
+.selected-page-action {
+    background-color: lightgray;
+    color: green;
+}
+
+.material-icons {
     cursor: pointer;
 }
 
@@ -32,7 +41,7 @@ body {
     padding-left: 1rem;
 }
 
-.cellprop-actions-cont>*:hover{
+.cellprop-actions-cont>*:hover {
     /* cursor: pointer; */
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
@@ -56,11 +65,11 @@ body {
     padding: 0.2rem;
 }
 
-.color-prop{
+.color-prop {
     position: relative;
 }
 
-.color-prop > input{
+.color-prop>input {
     opacity: 0;
     position: absolute;
     top: 0;
@@ -141,7 +150,7 @@ body {
     font-size: 0.9rem;
 }
 
-.sheet-content{
+.sheet-content {
     width: 5rem;
     text-align: center;
     cursor: pointer;
