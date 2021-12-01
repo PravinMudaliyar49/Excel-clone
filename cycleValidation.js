@@ -1,16 +1,17 @@
 //STORAGE -> 2D matrix (basic needed):
+let collectedGraphComponent = [];
 
 let graphComponentMatrix = [];
 
-for (let i = 0; i < rows; i++) {
-    let row = [];
-    for (let j = 0; j < cols; j++) {
-        //Why array ? ====> More than 1 child relation (dependency) can be achieved.
-        row.push([]);
-    }
+// for (let i = 0; i < rows; i++) {
+//     let row = [];
+//     for (let j = 0; j < cols; j++) {
+//         //Why array ? ====> More than 1 child relation (dependency) can be achieved.
+//         row.push([]);
+//     }
 
-    graphComponentMatrix.push(row);
-}
+//     graphComponentMatrix.push(row);
+// }
 
 function isGraphCyclic(graphComponentMatrix) {
     let visited = [];

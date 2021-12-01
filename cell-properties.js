@@ -1,29 +1,36 @@
 //STORAGE:
+let collectedSheetDB = [];  //Contains all the sheets.
+
 let sheetDB = [];
 
-for (let i = 0; i < rows; i++) {
-    let sheetRow = [];
-
-    for (let j = 0; j < cols; j++) {
-        let cellProp = {
-            bold: false,
-            italic: false,
-            underline: false,
-            alignment: "left",
-            fontFamily: "monospace",
-            fontSize: "14",
-            fontColor: "#000000",
-            bgColor: "#000000",     //Just for the sake of indication.
-            value: "",
-            formula: "",
-            children: []
-        };
-
-        sheetRow.push(cellProp);
-    }
-
-    sheetDB.push(sheetRow);
+{
+    let addSheetBtn = document.querySelector(".sheet-add-icon");
+    addSheetBtn.click();
 }
+
+// for (let i = 0; i < rows; i++) {
+//     let sheetRow = [];
+
+//     for (let j = 0; j < cols; j++) {
+//         let cellProp = {
+//             bold: false,
+//             italic: false,
+//             underline: false,
+//             alignment: "left",
+//             fontFamily: "monospace",
+//             fontSize: "14",
+//             fontColor: "#000000",
+//             bgColor: "#000000",     //Just for the sake of indication.
+//             value: "",
+//             formula: "",
+//             children: []
+//         };
+
+//         sheetRow.push(cellProp);
+//     }
+
+//     sheetDB.push(sheetRow);
+// }
 
 //Selectors for cell properties:
 let bold = document.querySelector(".bold");
@@ -42,7 +49,7 @@ let leftAlign = alignment[0];
 let centerAlign = alignment[1];
 let rightAlign = alignment[2];
 
-let activeColorProp = "#d1ccc0";
+let activeColorProp = "#c8d6e5";
 let inactiveColorProp = "#ecf0f1";
 
 //APPLICATION OF TWO-WAY BINDING :-
@@ -237,7 +244,7 @@ function addListenerToAttachedCellProps(cell) {
 
         let formulaBar = document.querySelector(".formula-bar");
         formulaBar.value = cellProp.formula;
-        cell.value = cellProp.value;
+        cell.innerText = cellProp.value;
 
     });
 
