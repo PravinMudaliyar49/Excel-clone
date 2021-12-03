@@ -1,3 +1,5 @@
+//Logic behind this function: As soon as we colored a cell, we want to wait for few seconds.
+//At the same thime, we want to be in sync with the rest of the code. Hence block the program's execution and keep the colors on... for few seconds, using  async, await and promises.
 function colorPromise() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -38,7 +40,7 @@ async function dfsCycleDetectionTracePath(graphComponentMatrix, sr, sc, visited,
 
     let cell = document.querySelector(`.address-cell[rid="${sr}"][cid="${sc}"]`);
 
-    cell.style.backgroundColor = "lightblue";
+    cell.style.backgroundColor = "red";
     await colorPromise();       //Program will pause for 1 sec here.
 
     for (let children = 0; children < graphComponentMatrix[sr][sc].length; children++) {
@@ -54,13 +56,16 @@ async function dfsCycleDetectionTracePath(graphComponentMatrix, sr, sc, visited,
         } else if (visited[nrid][ncid] && dfsVisited[nrid][ncid]) {
             let cyclicCell = document.querySelector(`.address-cell[rid="${nrid}"][cid="${ncid}"]`);
             
-            cyclicCell.style.backgroundColor = "lightsalmon";
+            cyclicCell.style.backgroundColor = "green";
             await colorPromise();
+
             cyclicCell.style.backgroundColor = "transparent";
-            
             await colorPromise();
+
             cell.style.backgroundColor = "transparent";
+            await colorPromise();
             
+            //We want to control the exection of code outside of this "dfsCycleDetectionTracePath" function. Hence, instead of directly returning value, wrap it in Promise. 
             return Promise.resolve(true);
         }
     }

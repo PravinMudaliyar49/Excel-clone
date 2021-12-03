@@ -19,6 +19,7 @@ addSheetBtn.addEventListener("click", (event) => {
 
     createSheetDB();
     createGraphComponentMatrix();
+
     handleSheetActiveness(sheet);
     handleSheetRemoval(sheet);
     sheet.click();
@@ -117,7 +118,7 @@ function handleSheetRemoval(sheet) {
 
         let allSheetsFolder = document.querySelectorAll(".sheet-folder");
         if (allSheetsFolder.length === 1) {
-            alert("You need to have atleast one sheet!!!!!");
+            alert("You need to have atleast one sheet !!!!!");
             return;
         }
 
@@ -135,7 +136,7 @@ function handleSheetRemoval(sheet) {
         //UI removal:
         handleSheetUIRemoval(sheet);
 
-        //By default, bring sheet1 to active:
+        //By default, bring sheet1 to focus:
         sheetDB = collectedSheetDB[0];
         graphComponentMatrix = collectedGraphComponent[0];
         handleSheetProperties();

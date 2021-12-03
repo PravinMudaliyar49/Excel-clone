@@ -3,10 +3,12 @@ let collectedSheetDB = [];  //Contains all the sheets.
 
 let sheetDB = [];
 
-{
-    let addSheetBtn = document.querySelector(".sheet-add-icon");
-    addSheetBtn.click();
-}
+// {
+//     let addSheetBtn = document.querySelector(".sheet-add-icon");
+//     addSheetBtn.click();
+// }
+
+addSheetBtn.click();
 
 // for (let i = 0; i < rows; i++) {
 //     let sheetRow = [];
@@ -58,6 +60,8 @@ let inactiveColorProp = "#ecf0f1";
 bold.addEventListener("click", (event) => {
     let address = addressBar.value;
     let [cell, cellProp] = getCellAndCellProp(address);
+
+    //We need cell as well as cellProp to achieve two-way binding. "cell" is for UI change and "cellProp" for DB change.
 
     //MODIFICATION:
     cellProp.bold = !cellProp.bold;     //Data change.

@@ -55,6 +55,8 @@ copyBtn.addEventListener("click", (event) => {
         return;
     }
 
+    myFunction();
+
     copiedData = [];
 
     for (let i = rangeStorage[0][0]; i <= rangeStorage[1][0]; i++) {
@@ -140,3 +142,17 @@ cutBtn.addEventListener("click", (event) => {
 
     defaultSelectedCellUI();
 });
+
+function myFunction() {
+    // Get the snackbar DIV
+
+    var x = document.getElementById("snackbar");
+
+    // Add the "show" class to DIV
+    x.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(() => {
+        x.className = x.className.replace("show", "");
+    }, 3000);
+}

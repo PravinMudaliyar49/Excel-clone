@@ -7,7 +7,7 @@ for (let i = 0; i < rows; i++) {
             let [activeCell, cellProp] = getCellAndCellProp(address);
             let enteredData = activeCell.innerText;
 
-            if (enteredData === cellProp.value) {
+            if (Number(enteredData) === Number(cellProp.value)) {
                 return;
             }
 
@@ -15,7 +15,7 @@ for (let i = 0; i < rows; i++) {
 
             //If data in the currCell is modified, remove the parent-child relation of currCell with all the children. 
             //Also update all the children with the new entered value.
-            removeChildFromParent(cellProp.formula);
+            removeChildFromParent(cellProp.formula, address);
             cellProp.formula = "";
             updateChildrenCells(address);
 
@@ -32,7 +32,7 @@ formulaBar.addEventListener("keydown", async (event) => {
         let address = addressBar.value;
         let [cell, cellProp] = getCellAndCellProp(address);
         if (inputFormula !== cellProp.formula) {
-            removeChildFromParent(cellProp.formula);
+            removeChildFromParent(cellProp.formula, address);
         }
 
         addChildToGraphComponent(inputFormula, address);
@@ -58,14 +58,13 @@ formulaBar.addEventListener("keydown", async (event) => {
 
         setCellUIAndCellProp(evaluatedValue, inputFormula, address);
 
-        addChildToParent(inputFormula);
+        addChildToParent(inputFormula, address);
         updateChildrenCells(address);
     }
 });
 
-function addChildToParent(formula) {
+function addChildToParent(formula, childAddress) {
     let encodedFormula = formula.split(" ");
-    let childAddress = addressBar.value;
 
     for (let i = 0; i < encodedFormula.length; i++) {
         let asciiVal = encodedFormula[i].charCodeAt(0);
@@ -79,9 +78,8 @@ function addChildToParent(formula) {
     }
 }
 
-function removeChildFromParent(oldFormula) {
+function removeChildFromParent(oldFormula, childAddress) {
     let encodedFormula = oldFormula.split(" ");
-    let childAddress = addressBar.value;
 
     for (let i = 0; i < encodedFormula.length; i++) {
         let asciiVal = encodedFormula[i].charCodeAt(0);
